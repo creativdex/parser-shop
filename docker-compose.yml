@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  parser:
+    build: .
+    ports:
+      - "8901:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - selenium
+  selenium:
+    image: "selenium/standalone-chrome:4.8.3-20230404"
+    shm_size: "2g"
+    ports:
+      - "4444:4444"
+      - "7900:7900"
