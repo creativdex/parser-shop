@@ -3,7 +3,7 @@ services:
   parser:
     build: .
     ports:
-      - "8901:8000"
+      - "8000:8000"
     volumes:
       - .:/app
     depends_on:
