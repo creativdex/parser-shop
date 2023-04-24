@@ -30,7 +30,7 @@ class Parser:
         if isinstance(exc_val, HTTPException):
             logging.info(f"Ошибка: {exc_val.detail}")
             raise exc_val
-        else:
+        elif exc_val:
             logging.info(f"Ошибка: {exc_val}")
             raise HTTPException(
                 403,
