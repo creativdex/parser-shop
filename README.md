@@ -1,29 +1,7 @@
 # Parser Shop
 Парсер дял веб сайтов
 
-## 1. Установка
-
-Установка модулей:
-```
-pip install -r requirements.txt
-```
-
-Запуск сервера:
-```
-python -m server.py
-```
-
-Адрес сервера:
-```
-http://127.0.0.1:8000
-```
-
-Swagger документация:
-```
-http://127.0.0.1:8000/docs
-```
-
-## 2. Установка Docker
+## 1. Установка Docker
 
 Сборка образа:
 ```
@@ -50,14 +28,14 @@ Swagger документация:
 http://127.0.0.1:8000/docs
 ```
 
-## 3. Установка Docker Compose
+## 2. Установка Docker Compose
 
 Сборка образа и запуск контейнеров с зависимостями:
 ```
 sudo docker compose up -d
 ```
 
-## 4. Использование
+## 3. Использование
 
 Сделать пост запрос:
 ```
@@ -74,7 +52,7 @@ POST на адрес http://127.0.0.1:8000/get_spec_dns
     {
         "guid": "url"
     },
-        {
+    {
         "guid": "url"
     }
 ]
@@ -89,7 +67,7 @@ POST на адрес http://127.0.0.1:8000/get_spec_dns
     {
         "3d71f39a-7bd3-436f-bd65-e38115fc3dfb": "https://www.dns-shop.ru/product/86910e9ae860ed20/133-noutbuk-apple-macbook-air-seryj/"
     },
-        {
+    {
         "331759d2-02a8-4387-b315-95b1eaa67afb": "https://www.dns-shop.ru/product/863fb6e721d5ed20/5-smartfon-itel-a25-16-gb-biruzovyj/characteristics/"
     }
 ]
