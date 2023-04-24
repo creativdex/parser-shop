@@ -1,5 +1,6 @@
 import re
 import logging
+from fastapi import HTTPException
 from bs4 import BeautifulSoup
 from schemas import InputSchemas, GuidIrl
 from selenium import webdriver
@@ -26,9 +27,17 @@ class Parser:
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         self.driver.quit()
-        if exc_val:
-            logging.info(f"Ошибка: {exc_type}")
-            raise
+        if isinstance(exc_val, HTTPException):
+            logging.info(f"Ошибка: {exc_val.detail}")
+            raise exc_val
+        else:
+            logging.info(f"Ошибка: {exc_val}")
+            raise HTTPException(
+                403,
+                detail={
+                    "err": str(exc_val),
+                },
+            )
 
     async def get_page(self, url):
         self.driver.get(url)
@@ -56,12 +65,15 @@ class Parser:
         return parse_obj_as(GuidIrl, *dicts)
 
     async def check_url_dns(self, url: str):
-        if re.search("characteristics", url):
-            return url
-        else:
-            if url[-1] == "/":
-                url = url + "characteristics/"
+        if re.search("dns-shop.ru", url):
+            if re.search("characteristics", url):
                 return url
             else:
-                url = url + "/characteristics/"
-                return url
+                if url[-1] == "/":
+                    url = url + "characteristics/"
+                    return url
+                else:
+                    url = url + "/characteristics/"
+                    return url
+        else:
+            raise Exception.args
